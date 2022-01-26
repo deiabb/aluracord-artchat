@@ -1,37 +1,23 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */ 
-      html, body, #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */ 
-    `}</style>
-  );
-}
-
 /*podemos usar argumentos dentro dessas funções, para elas receberem ali no outro componente um novo valor declarado lá. Aquela tag lá <Title> é uma children desse componente aqui, então aqui em cima, dentro do h1 podemos colocar {props.children}. É tratado como valor dinâmico*/
-function Titulo(props) { 
+
+// function HomePage() {
+//   return (
+//     <div>
+//       <Titulo tag='h2'>Bem vindo novamente!</Titulo>
+//       <h2>Discord | Alura Matrix</h2>
+//     </div>
+    
+//     )
+//   }
+
+// export default HomePage
+
+export function Titulo(props) { 
   const Tag = props.tag || 'h1';
   return (
     <>
@@ -46,25 +32,14 @@ function Titulo(props) {
   )
 }
 
-
-// function HomePage() {
-//   return (
-//     <div>
-//       <Titulo tag='h2'>Bem vindo novamente!</Titulo>
-//       <h2>Discord | Alura Matrix</h2>
-//     </div>
-    
-//     )
-//   }
-
-// export default HomePage
-
 export default function PaginaInicial() {
-  const username = 'deiabb';
+  //const username = 'deiabb'; modo antigo 
+  const [username, setUsername] = React.useState('deiabb');
+  const roteamento = useRouter();
 
   return (
     <>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -91,6 +66,10 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit = {function (event) {
+              event.preventDefault();
+              roteamento.push('/chat');
+            }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -102,6 +81,13 @@ export default function PaginaInicial() {
             </Text>
 
             <TextField
+              required 
+              minlength="3"
+              value={username}
+              onChange={function (event) {
+                const valor = event.target.value;
+                  setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -143,11 +129,13 @@ export default function PaginaInicial() {
               minHeight: '240px',
             }}
           >
+            
             <Image
               styleSheet={{
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
+              
               src={`https://github.com/${username}.png`}
             />
             <Text
