@@ -2,6 +2,7 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
+/* 5 fevereiro 2024 vamos ver se altera*/
 
 /*podemos usar argumentos dentro dessas funções, para elas receberem ali no outro componente um novo valor declarado lá. Aquela tag lá <Title> é uma children desse componente aqui, então aqui em cima, dentro do h1 podemos colocar {props.children}. É tratado como valor dinâmico*/
 
