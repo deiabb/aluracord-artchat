@@ -105,7 +105,7 @@ export default function PaginaInicial() {
               buttonColors={{
                 contrastColor: appConfig.theme.colors.neutrals["400"],
                 mainColor: appConfig.theme.colors.secondary['600'],
-                mainColorLight: appConfig.theme.colors.primary['200'],
+                mainColorLight: appConfig.theme.colors.primary['500'],
                 mainColorStrong: appConfig.theme.colors.secondary['900'],
               }}
             />
